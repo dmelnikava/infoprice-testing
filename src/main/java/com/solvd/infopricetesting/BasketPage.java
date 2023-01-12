@@ -2,21 +2,21 @@ package com.solvd.infopricetesting;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
-public class BasketPage {
+public class BasketPage extends AbstractPage {
 
-    private WebDriver driver;
-    private By onHomePageButton = By.linkText("главную страницу");
+    private final By onHomePageButton = By.linkText("главную страницу");
 
     public BasketPage(WebDriver driver){
-        this.driver = driver;
-        if (!driver.getTitle().equals("infoprice.by | Список покупок")) {
+        super(driver);
+        if (!waitDriver().until(ExpectedConditions.titleIs("infoprice.by | Список покупок"))) {
             throw new IllegalStateException("This is not Basket Page");
         }
     }
 
-    public HomePage clickOnHomePageButton() {
-        driver.findElement(onHomePageButton).click();
-        return new HomePage(driver);
+    public HomePage clickOnHomePage() {
+        waitDriver().until(ExpectedConditions.elementToBeClickable(onHomePageButton)).click();
+        return new HomePage(getDriver());
     }
 }

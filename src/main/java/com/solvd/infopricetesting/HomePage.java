@@ -3,36 +3,37 @@ package com.solvd.infopricetesting;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
-public class HomePage {
+public class HomePage extends AbstractPage{
 
-    private WebDriver driver;
-    private By filterButton = By.cssSelector(".filter-menu .name-button");
-    private By filterButtonLocation = By.xpath("//*[contains(text(), 'Каталог')]/../../../..//*[contains(text(), 'Фильтр')]");
-    private By filterBarShowStatus = By.xpath("//*[@class='collapse show']");
-    private By basketIcon = By.cssSelector(".cart-img");
+    private final By filterButton = By.cssSelector(".filter-menu .name-button");
+    private final By filterButtonLocation = By.xpath("//*[contains(text(), 'Каталог')]/../../../..//*[contains(text(), 'Фильтр')]");
+    private final By filterBarShowStatus = By.xpath("//*[@class='collapse show']");
+    private final By basketIcon = By.cssSelector(".cart-img");
 
     public HomePage(WebDriver driver){
-        this.driver = driver;
-        if (!driver.getTitle().equals("INFOPRICE — сервис сравнения цен на продукты в магазинах Минска")) {
+        super(driver);
+        if (!waitDriver().until(ExpectedConditions.titleIs("INFOPRICE — сервис сравнения цен на продукты в магазинах Минска"))) {
             throw new IllegalStateException("This is not Home Page");
         }
     }
 
-    public WebElement getFilterBarShowStatus() {
-        return driver.findElement(filterBarShowStatus);
-    }
-
-    public WebElement getFilterButtonLocation() {
-        return driver.findElement(filterButtonLocation);
-    }
-
-    public void clickFilterButton() {
-        driver.findElement(filterButton).click();
+    public HomePage clickFilterButton() {
+        waitDriver().until(ExpectedConditions.elementToBeClickable(filterButton)).click();
+        return this;
     }
 
     public BasketPage clickBasketIcon() {
-        driver.findElement(basketIcon).click();
-        return new BasketPage(driver);
+        waitDriver().until(ExpectedConditions.elementToBeClickable(basketIcon)).click();
+        return new BasketPage(getDriver());
+    }
+
+    public WebElement getFilterBarShowStatus() {
+        return waitDriver().until(ExpectedConditions.presenceOfElementLocated(filterBarShowStatus));
+    }
+
+    public WebElement getFilterButtonLocation() {
+        return waitDriver().until(ExpectedConditions.presenceOfElementLocated(filterButtonLocation));
     }
 }
