@@ -1,27 +1,49 @@
 package com.solvd.infopricetesting;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.core.Logger;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
 public abstract class AbstractPage {
 
+    private static final Logger LOGGER = (Logger) LogManager.getLogger(AbstractPage.class);
     private static WebDriver driver;
 
     public AbstractPage(WebDriver driver) {
         setDriver(driver);
     }
 
-    public WebDriver getDriver() {
-        return driver;
-    }
-
     public static void setDriver(WebDriver webDriver) {
         driver = webDriver;
     }
 
-    public WebDriverWait waitDriver() {
-        return new WebDriverWait(driver, Duration.ofSeconds(30));
+    public WebDriver getDriver() {
+        return driver;
+    }
+
+    public void verifyTitle(Duration duration, String title) {
+        WebDriverWait wait = waitDriver(duration);
+        if(!wait.until(ExpectedConditions.titleIs(title))) {
+            throw new IllegalStateException("This is not correct page");
+        }
+    }
+
+    public WebDriverWait waitDriver(Duration duration) {
+        return new WebDriverWait(driver, duration);
+    }
+
+    public void clickWebElement(Duration duration, By locator) {
+        WebDriverWait wait = waitDriver(duration);
+        wait.until(ExpectedConditions.elementToBeClickable(locator)).click();
+    }
+
+    public WebElement getWebElement(Duration duration, By locator) {
+        return waitDriver(duration).until(ExpectedConditions.presenceOfElementLocated(locator));
     }
 }

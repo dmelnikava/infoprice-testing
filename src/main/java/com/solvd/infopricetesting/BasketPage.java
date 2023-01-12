@@ -2,7 +2,8 @@ package com.solvd.infopricetesting;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
+
+import java.time.Duration;
 
 public class BasketPage extends AbstractPage {
 
@@ -10,13 +11,11 @@ public class BasketPage extends AbstractPage {
 
     public BasketPage(WebDriver driver){
         super(driver);
-        if (!waitDriver().until(ExpectedConditions.titleIs("infoprice.by | Список покупок"))) {
-            throw new IllegalStateException("This is not Basket Page");
-        }
+        verifyTitle(Duration.ofSeconds(15), "infoprice.by | Список покупок");
     }
 
     public HomePage clickOnHomePage() {
-        waitDriver().until(ExpectedConditions.elementToBeClickable(onHomePageButton)).click();
+        clickWebElement(Duration.ofSeconds(15), onHomePageButton);
         return new HomePage(getDriver());
     }
 }

@@ -1,12 +1,12 @@
 package com.solvd.infopricetesting;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.openqa.selenium.Point;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.*;
+import org.testng.asserts.SoftAssert;
 
-public class InfopriceTest extends AbstractTest{
+public class InfopriceTest extends AbstractTest {
 
     @Test(testName = "Check returning from the Basket page to the Home page")
     public void checkReturnFromBasketPageToHomePageTest() {
@@ -27,5 +27,16 @@ public class InfopriceTest extends AbstractTest{
         WebElement filterStatusBar = getHomePage().getFilterBarShowStatus();
 
         Assert.assertEquals(filterStatusBar.getAttribute("class"), "collapse show");
+    }
+
+    @Test(testName = "Check if the Close button is present to close the Filter menu")
+    public void checkCloseButtonLocationTest() {
+        getHomePage().clickFilterButton();
+        Point point = getHomePage().getCloseButton().getLocation();
+
+        SoftAssert softAssert = new SoftAssert();
+        softAssert.assertEquals(point.getX(), 411);
+        softAssert.assertEquals(point.getY(), 269);
+        softAssert.assertAll();
     }
 }
