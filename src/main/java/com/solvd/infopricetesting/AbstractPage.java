@@ -1,7 +1,5 @@
 package com.solvd.infopricetesting;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.core.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -12,7 +10,6 @@ import java.time.Duration;
 
 public abstract class AbstractPage {
 
-    private static final Logger LOGGER = (Logger) LogManager.getLogger(AbstractPage.class);
     private static WebDriver driver;
 
     public AbstractPage(WebDriver driver) {
@@ -34,10 +31,6 @@ public abstract class AbstractPage {
         }
     }
 
-    public WebDriverWait waitDriver(Duration duration) {
-        return new WebDriverWait(driver, duration);
-    }
-
     public void clickWebElement(Duration duration, By locator) {
         WebDriverWait wait = waitDriver(duration);
         wait.until(ExpectedConditions.elementToBeClickable(locator)).click();
@@ -45,5 +38,9 @@ public abstract class AbstractPage {
 
     public WebElement getWebElement(Duration duration, By locator) {
         return waitDriver(duration).until(ExpectedConditions.presenceOfElementLocated(locator));
+    }
+
+    public WebDriverWait waitDriver(Duration duration) {
+        return new WebDriverWait(driver, duration);
     }
 }

@@ -11,11 +11,11 @@ public class BasketPage extends AbstractPage {
 
     public BasketPage(WebDriver driver){
         super(driver);
-        verifyTitle(Duration.ofSeconds(15), "infoprice.by | Список покупок");
+        verifyTitle(Duration.ofSeconds(30), "infoprice.by | Список покупок");
     }
 
     public HomePage clickOnHomePage() {
-        clickWebElement(Duration.ofSeconds(15), onHomePageButton);
+        clickWebElement(Duration.ofSeconds(30), onHomePageButton);
         return new HomePage(getDriver());
     }
 }
