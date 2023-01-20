@@ -32,10 +32,6 @@ public class FilterMenu extends AbstractUIObject {
         super(driver, searchContext);
     }
 
-//    public FilterMenu openFilterMenu() {
-//        return this;
-//    }
-
     public WebElement getFilterShowStatus() {
         return filterShowStatus.getElement();
     }

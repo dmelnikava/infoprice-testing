@@ -10,13 +10,16 @@ import org.testng.Assert;
 import org.testng.annotations.*;
 import org.testng.asserts.SoftAssert;
 
+import static com.solvd.infopricetesting.utils.MutableCaps.deployCapabilities;
+
 public class InfopriceTest implements IAbstractTest {
 
+    @Parameters({"browserName"})
     @Test(testName = "Check returning from the Basket page to the Home page")
-    public void checkReturnFromBasketPageToHomePageTest() {
+    public void checkReturnFromBasketPageToHomePageTest(String browserName) {
         SoftAssert softAssert = new SoftAssert();
 
-        HomePage homePage = new HomePage(getDriver());
+        HomePage homePage = new HomePage(getDriver(browserName, deployCapabilities(browserName)));
         homePage.open();
 
         BasketPage basketPage = homePage.clickBasketIcon();
@@ -24,22 +27,24 @@ public class InfopriceTest implements IAbstractTest {
 
         softAssert.assertTrue(returnedHomePage.isPageOpened(10), "Home page is not opened");
 
-        softAssert.assertEquals(getDriver().getCurrentUrl(), "https://infoprice.by/", "Home page is not opened");
+        softAssert.assertEquals(getDriver(browserName, deployCapabilities(browserName)).getCurrentUrl(), "https://infoprice.by/", "Home page is not opened");
 
         softAssert.assertAll();
     }
 
+    @Parameters({"browserName"})
     @Test(testName = "Check if the Filter menu locates under Catalog menu")
-    public void checkFilterMenuLocationTest() {
-        HomePage homePage = new HomePage(getDriver());
+    public void checkFilterMenuLocationTest(String browserName) {
+        HomePage homePage = new HomePage(getDriver(browserName, deployCapabilities(browserName)));
         homePage.open();
 
         Assert.assertNotNull(homePage.getFilterButtonLocation(), "Filter button is not located in the right place");
     }
 
+    @Parameters({"browserName"})
     @Test(testName = "Check the opening of the Filter menu by clicking on the text")
-    public void checkOpenFilterMenuTest() {
-        HomePage homePage = new HomePage(getDriver());
+    public void checkOpenFilterMenuTest(String browserName) {
+        HomePage homePage = new HomePage(getDriver(browserName, deployCapabilities(browserName)));
         homePage.open();
 
         FilterMenu filterMenu = homePage.getFilterMenu();
@@ -50,26 +55,29 @@ public class InfopriceTest implements IAbstractTest {
                 "Filter menu is not opened by clicking on the menu icon");
     }
 
+    @Parameters({"browserName"})
     @Test(testName = "Check if the Close button is present to close the Filter menu")
-    public void checkCloseButtonLocationTest() {
+    public void checkCloseButtonLocationTest(String browserName) {
         SoftAssert softAssert = new SoftAssert();
 
-        HomePage homePage = new HomePage(getDriver());
+        HomePage homePage = new HomePage(getDriver(browserName, deployCapabilities(browserName)));
+        getDriver(browserName, deployCapabilities(browserName)).manage().window().maximize();
         homePage.open();
 
         FilterMenu filterMenu = homePage.getFilterMenu();
         if(filterMenu.isUIObjectPresent()) {
             Point point = filterMenu.getCloseButton().getLocation();
-            softAssert.assertEquals(point.getX(), 411);
-            softAssert.assertEquals(point.getY(), 269);
+            softAssert.assertEquals(point.getX(), 411, "Close button is not located in the right place");
+            softAssert.assertEquals(point.getY(), 269, "Close button is not located in the right place");
         }
 
         softAssert.assertAll();
     }
 
+    @Parameters({"browserName"})
     @Test(testName = "Check closing the Filter menu by clicking Close button")
-    public void checkCloseFilterMenuTest() {
-        HomePage homePage = new HomePage(getDriver());
+    public void checkCloseFilterMenuTest(String browserName) {
+        HomePage homePage = new HomePage(getDriver(browserName, deployCapabilities(browserName)));
         homePage.open();
 
         FilterMenu filterMenu = homePage.getFilterMenu();
@@ -78,14 +86,16 @@ public class InfopriceTest implements IAbstractTest {
 
         WebElement filterMenuStatus = returnedHomePage.getFilterUnshowStatus();
 
-        Assert.assertEquals(filterMenuStatus.getAttribute("class"), "collapse");
+        Assert.assertEquals(filterMenuStatus.getAttribute("class"), "collapse",
+                "Filter menu was not close by clicking Close button");
     }
 
+    @Parameters({"browserName"})
     @Test(testName = "Check the option to enable the All shops function in the Filter menu")
-    public void checkOptionAllShopsTest() {
+    public void checkOptionAllShopsTest(String browserName) {
         SoftAssert softAssert = new SoftAssert();
 
-        HomePage homePage = new HomePage(getDriver());
+        HomePage homePage = new HomePage(getDriver(browserName, deployCapabilities(browserName)));
         homePage.open();
 
         FilterMenu filterMenu = homePage.getFilterMenu();
@@ -93,14 +103,14 @@ public class InfopriceTest implements IAbstractTest {
 
         for(int i = 0; i <= 10; i++) {
             boolean isSelected = filterMenu.getFilterCheckBoxes().get(i).isSelected();
-            softAssert.assertTrue(isSelected);
+            softAssert.assertTrue(isSelected, "Checkbox of the shop was not selected");
         }
 
         HomePage returnedHomePage = filterMenu.clickFilterButton();
 
         for(int i = 0; i <= 9; i++) {
             boolean isDisplayed = returnedHomePage.getFilterTags().get(i).isDisplayed();
-            softAssert.assertTrue(isDisplayed);
+            softAssert.assertTrue(isDisplayed, "Tag of the shop is not displayed");
         }
 
         softAssert.assertAll();
