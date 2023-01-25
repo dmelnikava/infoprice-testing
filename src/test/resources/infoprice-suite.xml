@@ -3,28 +3,8 @@
 
 <suite name="infoprice-suite" parallel="tests" thread-count="2">
     <test name="chrome-test" parallel="methods" thread-count="2">
-        <parameter name="browserName" value="chrome"/>
         <classes>
-            <class name="com.solvd.infopricetesting.InfopriceTest">
-                <methods>
-                    <include name="checkReturnFromBasketPageToHomePageTest"/>
-                    <include name="checkOpenFilterMenuTest"/>
-                    <include name="checkCloseFilterMenuTest"/>
-                    <include name="checkOptionAllShopsTest"/>
-                    <include name="checkCloseButtonLocationTest"/>
-                </methods>
-            </class>
-        </classes>
-    </test>
-    <test name="firefox-test" parallel="methods" thread-count="2">
-        <parameter name="browserName" value="firefox" />
-        <classes>
-            <class name="com.solvd.infopricetesting.InfopriceTest">
-                <methods>
-                    <include name="checkFilterMenuLocationTest"/>
-                    <include name="checkReturnFromBasketPageToHomePageTest"/>
-                </methods>
-            </class>
+            <class name="com.solvd.infopricetesting.InfopriceTest"/>
         </classes>
     </test>
 </suite>
