@@ -126,7 +126,7 @@ public class HomePage extends HomePageBase implements IMobileUtils {
 
     @Override
     public BasketPageBase clickBasketIcon() {
-        basketIcon.click();
+        basketIcon.click(10L);
         return initPage(getDriver(), BasketPageBase.class);
     }
 }

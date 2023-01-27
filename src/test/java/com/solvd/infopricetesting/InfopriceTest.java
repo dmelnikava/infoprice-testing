@@ -3,6 +3,7 @@ package com.solvd.infopricetesting;
 import com.qaprosoft.carina.core.foundation.IAbstractTest;
 import com.solvd.infopricetesting.common.BasketPageBase;
 import com.solvd.infopricetesting.common.HomePageBase;
+import com.solvd.infopricetesting.utils.MobileContextUtils;
 import com.zebrunner.carina.utils.mobile.IMobileUtils;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebElement;
@@ -34,6 +35,9 @@ public class InfopriceTest implements IAbstractTest, IMobileUtils {
     public void checkFilterMenuLocationTest() {
         HomePageBase homePage = initPage(getDriver(), HomePageBase.class);
         homePage.open();
+
+        MobileContextUtils contextHelper = new MobileContextUtils();
+        contextHelper.switchMobileContext(MobileContextUtils.View.NATIVE);
 
         Assert.assertNotNull(homePage.getFilterButtonLocation(), "Filter button is not located in the right place");
     }
