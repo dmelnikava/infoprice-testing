@@ -129,4 +129,9 @@ public class HomePage extends HomePageBase implements IMobileUtils {
         basketIcon.click(10L);
         return initPage(getDriver(), BasketPageBase.class);
     }
+
+    @Override
+    public String getTextOfTitle() {
+        return title.getText();
+    }
 }

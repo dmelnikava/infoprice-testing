@@ -3,6 +3,7 @@ package com.solvd.infopricetesting;
 import com.qaprosoft.carina.core.foundation.IAbstractTest;
 import com.solvd.infopricetesting.common.BasketPageBase;
 import com.solvd.infopricetesting.common.HomePageBase;
+import com.solvd.infopricetesting.common.NativeViewPageBase;
 import com.solvd.infopricetesting.utils.MobileContextUtils;
 import com.zebrunner.carina.utils.mobile.IMobileUtils;
 import org.openqa.selenium.Point;
@@ -11,7 +12,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
-public class InfopriceTest implements IAbstractTest, IMobileUtils {
+public class InfopriceAndroidTest implements IAbstractTest, IMobileUtils {
 
     @Test(testName = "Check returning from the Basket page to the Home page")
     public void checkReturnFromBasketPageToHomePageTest() {
@@ -36,10 +37,17 @@ public class InfopriceTest implements IAbstractTest, IMobileUtils {
         HomePageBase homePage = initPage(getDriver(), HomePageBase.class);
         homePage.open();
 
+        Assert.assertNotNull(homePage.getFilterButtonLocation(), "Filter button is not located in the right place");
+
         MobileContextUtils contextHelper = new MobileContextUtils();
         contextHelper.switchMobileContext(MobileContextUtils.View.NATIVE);
 
-        Assert.assertNotNull(homePage.getFilterButtonLocation(), "Filter button is not located in the right place");
+        NativeViewPageBase nativeViewPage = initPage(getDriver(), NativeViewPageBase.class);
+        nativeViewPage.clickChromeMenuBtn();
+        nativeViewPage.clickBookmark();
+
+        Assert.assertEquals(nativeViewPage.getBookmarkMessage(), "Bookmarked");
+
     }
 
     @Test(testName = "Check the opening of the Filter menu by clicking on the text")

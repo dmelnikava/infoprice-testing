@@ -36,4 +36,6 @@ public abstract class HomePageBase extends AbstractPage {
 
     public abstract BasketPageBase clickBasketIcon();
 
+    public abstract String getTextOfTitle();
+
 }
