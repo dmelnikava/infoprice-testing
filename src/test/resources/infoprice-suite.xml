@@ -4,7 +4,7 @@
 <suite name="infoprice-suite" parallel="tests" thread-count="2">
     <test name="chrome-test" parallel="methods" thread-count="2">
         <classes>
-            <class name="com.solvd.infopricetesting.InfopriceTest"/>
+            <class name="com.solvd.infopricetesting.InfopriceAndroidTest"/>
         </classes>
     </test>
 </suite>
