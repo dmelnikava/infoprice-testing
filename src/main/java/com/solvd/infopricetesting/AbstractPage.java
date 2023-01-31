@@ -3,10 +3,12 @@ package com.solvd.infopricetesting;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.List;
 
 public abstract class AbstractPage {
 
@@ -32,12 +34,26 @@ public abstract class AbstractPage {
     }
 
     public void clickWebElement(Duration duration, By locator) {
+        WebElement element = waitDriver(duration).until(ExpectedConditions.elementToBeClickable(locator));
+        Actions actions = new Actions(getDriver());
+        actions.moveToElement(element).click().perform();
+    }
+
+    public void clickCheckBox(Duration duration, By locator) {
         WebDriverWait wait = waitDriver(duration);
-        wait.until(ExpectedConditions.elementToBeClickable(locator)).click();
+        WebElement checkBoxElement = wait.until(ExpectedConditions.presenceOfElementLocated(locator));
+        boolean isSelected = checkBoxElement.isSelected();
+        if(!isSelected) {
+            checkBoxElement.click();
+        }
     }
 
     public WebElement getWebElement(Duration duration, By locator) {
         return waitDriver(duration).until(ExpectedConditions.presenceOfElementLocated(locator));
+    }
+
+    public List<WebElement> getWebElements(Duration duration, By locator) {
+        return waitDriver(duration).until(ExpectedConditions.presenceOfAllElementsLocatedBy(locator));
     }
 
     public WebDriverWait waitDriver(Duration duration) {

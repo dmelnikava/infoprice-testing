@@ -7,15 +7,15 @@ import java.time.Duration;
 
 public class BasketPage extends AbstractPage {
 
-    private final By onHomePageButton = By.linkText("главную страницу");
+    private final By onHomePageButton = By.xpath("//*[contains(text(), 'главную страницу')]");
 
     public BasketPage(WebDriver driver){
         super(driver);
-        verifyTitle(Duration.ofSeconds(30), "infoprice.by | Список покупок");
+        verifyTitle(Duration.ofSeconds(50), "infoprice.by | Список покупок");
     }
 
     public HomePage clickOnHomePage() {
-        clickWebElement(Duration.ofSeconds(30), onHomePageButton);
+        clickWebElement(Duration.ofSeconds(100), onHomePageButton);
         return new HomePage(getDriver());
     }
 }

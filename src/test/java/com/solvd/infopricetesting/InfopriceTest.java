@@ -24,7 +24,7 @@ public class InfopriceTest extends AbstractTest {
     @Test(testName = "Check the opening of the Filter menu by clicking on the text")
     public void checkOpenFilterMenuTest() {
         getHomePage().clickFilterButton();
-        WebElement filterStatusBar = getHomePage().getFilterBarShowStatus();
+        WebElement filterStatusBar = getHomePage().getFilterShowStatus();
 
         Assert.assertEquals(filterStatusBar.getAttribute("class"), "collapse show");
     }
@@ -37,6 +37,39 @@ public class InfopriceTest extends AbstractTest {
         SoftAssert softAssert = new SoftAssert();
         softAssert.assertEquals(point.getX(), 411);
         softAssert.assertEquals(point.getY(), 269);
+        softAssert.assertAll();
+    }
+
+    @Test(testName = "Check closing the Filter menu by clicking Close button")
+    public void checkCloseFilterMenuTest() {
+        getHomePage()
+                .clickFilterButton()
+                .clickCloseButton();
+        WebElement filterMenuStatus = getHomePage().getFilterUnshowStatus();
+
+        Assert.assertEquals(filterMenuStatus.getAttribute("class"), "collapse");
+    }
+
+    @Test(testName = "Check the option to enable the All shops function in the Filter menu")
+    public void checkOptionAllShopsTest() {
+        getHomePage()
+                .clickFilterButton()
+                .clickAllShopsCheckBox();
+
+        SoftAssert softAssert = new SoftAssert();
+        for(int i = 0; i <= 10; i++) {
+            boolean isSelected = getHomePage()
+                    .getFilterCheckBoxes().get(i).isSelected();
+            softAssert.assertTrue(isSelected);
+        }
+
+        getHomePage().clickCloseButton();
+
+        for(int i = 0; i <= 9; i++) {
+            boolean isDisplayed = getHomePage()
+                    .getFilterTags().get(i).isDisplayed();
+            softAssert.assertTrue(isDisplayed);
+        }
         softAssert.assertAll();
     }
 }
