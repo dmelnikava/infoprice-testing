@@ -3,20 +3,19 @@ package com.solvd.infopricetesting;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class BasketPage {
+import java.time.Duration;
 
-    private WebDriver driver;
-    private By onHomePageButton = By.linkText("главную страницу");
+public class BasketPage extends AbstractPage {
+
+    private final By onHomePageButton = By.linkText("главную страницу");
 
     public BasketPage(WebDriver driver){
-        this.driver = driver;
-        if (!driver.getTitle().equals("infoprice.by | Список покупок")) {
-            throw new IllegalStateException("This is not Basket Page");
-        }
+        super(driver);
+        verifyTitle(Duration.ofSeconds(30), "infoprice.by | Список покупок");
     }
 
-    public HomePage clickOnHomePageButton() {
-        driver.findElement(onHomePageButton).click();
-        return new HomePage(driver);
+    public HomePage clickOnHomePage() {
+        clickWebElement(Duration.ofSeconds(30), onHomePageButton);
+        return new HomePage(getDriver());
     }
 }

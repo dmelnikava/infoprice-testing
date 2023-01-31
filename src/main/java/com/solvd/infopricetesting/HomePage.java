@@ -4,35 +4,50 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-public class HomePage {
+import java.time.Duration;
 
-    private WebDriver driver;
-    private By filterButton = By.cssSelector(".filter-menu .name-button");
-    private By filterButtonLocation = By.xpath("//*[contains(text(), 'Каталог')]/../../../..//*[contains(text(), 'Фильтр')]");
-    private By filterBarShowStatus = By.xpath("//*[@class='collapse show']");
-    private By basketIcon = By.cssSelector(".cart-img");
+public class HomePage extends AbstractPage{
+
+    private final By filterButton = By.cssSelector(".filter-menu .name-button");
+    private final By filterButtonLocation = By.xpath("//*[contains(text(), 'Каталог')]/../../../..//*[contains(text(), 'Фильтр')]");
+    private final By filterBarShowStatus = By.xpath("//*[@class='collapse show']");
+    private final By filterComponents = By.xpath("//*[@class='list-filter components']");
+    private final By basketIcon = By.cssSelector(".cart-img");
+    private final By closeButton = By.cssSelector("button.navbar-filters .close-button ");
 
     public HomePage(WebDriver driver){
-        this.driver = driver;
-        if (!driver.getTitle().equals("INFOPRICE — сервис сравнения цен на продукты в магазинах Минска")) {
-            throw new IllegalStateException("This is not Home Page");
-        }
+        super(driver);
+        verifyTitle(Duration.ofSeconds(30), "INFOPRICE — сервис сравнения цен на продукты в магазинах Минска");
     }
 
-    public WebElement getFilterBarShowStatus() {
-        return driver.findElement(filterBarShowStatus);
-    }
-
-    public WebElement getFilterButtonLocation() {
-        return driver.findElement(filterButtonLocation);
-    }
-
-    public void clickFilterButton() {
-        driver.findElement(filterButton).click();
+    public HomePage clickFilterButton() {
+        clickWebElement(Duration.ofSeconds(30), filterButton);
+        return this;
     }
 
     public BasketPage clickBasketIcon() {
-        driver.findElement(basketIcon).click();
-        return new BasketPage(driver);
+        clickWebElement(Duration.ofSeconds(30), basketIcon);
+        return new BasketPage(getDriver());
+    }
+
+    public HomePage clickCloseButton() {
+        clickWebElement(Duration.ofSeconds(30), closeButton);
+        return this;
+    }
+
+    public WebElement getFilterBarShowStatus() {
+        return getWebElement(Duration.ofSeconds(30), filterBarShowStatus);
+    }
+
+    public WebElement getFilterButtonLocation() {
+        return getWebElement(Duration.ofSeconds(30), filterButtonLocation);
+    }
+
+    public WebElement getCloseButton() {
+        return getWebElement(Duration.ofSeconds(30), closeButton);
+    }
+
+    public WebElement getFilterComponents() {
+        return getWebElement(Duration.ofSeconds(30), filterComponents);
     }
 }
