@@ -1,6 +1,7 @@
 .idea/
 logs/
-target/
 reports/
+screenshots/
+target/
 .DS_Store
 *.iml

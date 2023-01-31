@@ -3,6 +3,7 @@ package com.solvd.infopricetesting;
 import com.qaprosoft.carina.core.foundation.IAbstractTest;
 import com.solvd.infopricetesting.common.BasketPageBase;
 import com.solvd.infopricetesting.common.HomePageBase;
+import com.solvd.infopricetesting.common.NativeViewPageBase;
 import com.solvd.infopricetesting.utils.MobileContextUtils;
 import com.zebrunner.carina.utils.mobile.IMobileUtils;
 import org.openqa.selenium.Point;
@@ -36,10 +37,16 @@ public class InfopriceTest implements IAbstractTest, IMobileUtils {
         HomePageBase homePage = initPage(getDriver(), HomePageBase.class);
         homePage.open();
 
+        Assert.assertNotNull(homePage.getFilterButtonLocation(), "Filter button is not located in the right place");
+
         MobileContextUtils contextHelper = new MobileContextUtils();
         contextHelper.switchMobileContext(MobileContextUtils.View.NATIVE);
 
-        Assert.assertNotNull(homePage.getFilterButtonLocation(), "Filter button is not located in the right place");
+        NativeViewPageBase nativeViewPage = initPage(getDriver(), NativeViewPageBase.class);
+        nativeViewPage.clickMenuBtn();
+        nativeViewPage.clickBookmark();
+
+        Assert.assertEquals(nativeViewPage.getBookmarkMessage(), "Bookmarked");
     }
 
     @Test(testName = "Check the opening of the Filter menu by clicking on the text")
@@ -66,7 +73,7 @@ public class InfopriceTest implements IAbstractTest, IMobileUtils {
         WebElement closeButton = homePage.getCloseButton();
         if(closeButton.isEnabled()) {
             Point point = closeButton.getLocation();
-            softAssert.assertEquals(point.getX(), 367, "Close button is not located in the right place");
+            softAssert.assertEquals(point.getX(), 348, "Close button is not located in the right place");
             softAssert.assertEquals(point.getY(), 20, "Close button is not located in the right place");
         }
 
