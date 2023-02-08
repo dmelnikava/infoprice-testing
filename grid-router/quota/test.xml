@@ -18,16 +18,4 @@
             </region>
         </version>
     </browser>
-    <browser name="opera" defaultVersion="94.0">
-        <version number="93.0">
-            <region name="1">
-                <host name="docker.for.mac.localhost" port="4445" count="1"/>
-            </region>
-        </version>
-        <version number="94.0">
-            <region name="1">
-                <host name="docker.for.mac.localhost" port="4445" count="1"/>
-            </region>
-        </version>
-    </browser>
 </qa:browsers>
