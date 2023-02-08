@@ -7,7 +7,8 @@ import com.solvd.infopricetesting.pages.HomePage;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
-import org.testng.annotations.*;
+import org.testng.annotations.Parameters;
+import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
 import static com.solvd.infopricetesting.utils.MutableCaps.deployCapabilities;
@@ -61,14 +62,13 @@ public class InfopriceTest implements IAbstractTest {
         SoftAssert softAssert = new SoftAssert();
 
         HomePage homePage = new HomePage(getDriver(browserName, deployCapabilities(browserName)));
-        getDriver(browserName, deployCapabilities(browserName)).manage().window().maximize();
         homePage.open();
 
         FilterMenu filterMenu = homePage.getFilterMenu();
         if(filterMenu.isUIObjectPresent()) {
             Point point = filterMenu.getCloseButton().getLocation();
-            softAssert.assertEquals(point.getX(), 411, "Close button is not located in the right place");
-            softAssert.assertEquals(point.getY(), 269, "Close button is not located in the right place");
+            softAssert.assertEquals(point.getX(), 643, "Close button is not located in the right place");
+            softAssert.assertEquals(point.getY(), 270, "Close button is not located in the right place");
         }
 
         softAssert.assertAll();

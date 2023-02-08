@@ -2,4 +2,7 @@
 logs/
 target/
 reports/
+config/logs/
+config/video/
+.DS_Store
 *.iml

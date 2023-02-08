@@ -15,7 +15,6 @@ public class BasketPage extends AbstractPage {
 
     public BasketPage(WebDriver driver){
         super(driver);
-        setPageAbsoluteURL("https://infoprice.by/cart");
     }
 
     public boolean isPageOpened() {

@@ -53,8 +53,8 @@
           <artifactId>maven-compiler-plugin</artifactId>
           <version>${compiler-plugin-version}</version>
           <configuration>
-            <source>19</source>
-            <target>19</target>
+            <source>11</source>
+            <target>11</target>
             <encoding>UTF-8</encoding>
           </configuration>
         </plugin>

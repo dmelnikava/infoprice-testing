@@ -3,9 +3,12 @@ package com.solvd.infopricetesting.components;
 import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
 import com.qaprosoft.carina.core.gui.AbstractUIObject;
 import com.solvd.infopricetesting.pages.HomePage;
-import org.openqa.selenium.*;
-import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.By;
+import org.openqa.selenium.SearchContext;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindBy;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,7 +49,7 @@ public class FilterMenu extends AbstractUIObject {
     }
 
     public WebElement getCloseButton() {
-        return driver.findElement(closeButton);
+        return getDriver().findElement(closeButton);
     }
 
     public void clickAllShopsCheckBox() {
@@ -57,13 +60,13 @@ public class FilterMenu extends AbstractUIObject {
         if(filterButton.isClickable()) {
             filterButton.click();
         }
-        return new HomePage(driver);
+        return new HomePage(getDriver());
     }
 
     public HomePage clickCloseButton() {
         WebElement element = driver.findElement(closeButton);
         Actions actions = new Actions(driver);
         actions.moveToElement(element).click().build().perform();
-        return new HomePage(driver);
+        return new HomePage(getDriver());
     }
 }
