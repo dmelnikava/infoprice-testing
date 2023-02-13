@@ -14,7 +14,7 @@
     <maven-surefire-plugin-version>3.0.0-M7</maven-surefire-plugin-version>
     <slf4j-version>2.0.5</slf4j-version>
     <apache-logger-version>2.19.0</apache-logger-version>
-    <suite>suite-name</suite>
+    <suite>infoprice-suite</suite>
   </properties>
 
   <dependencies>
