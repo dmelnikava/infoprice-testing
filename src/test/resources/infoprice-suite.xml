@@ -1,37 +1,41 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
 
-<suite name="infoprice-suite">
+<suite name="infoprice-suite" parallel="methods">
 
     <parameter name="jenkinsJobName" value="InfopriceTest"/>
     <parameter name="jenkinsJobType" value="web"/>
     <parameter name="jenkinsEnvironments" value="DEMO"/>
+
+<!--    <parameter name="jenkinsRegressionPipeline" value="web_regression, full_regression"/>-->
+<!--    <parameter name="jenkinsRegressionMatrix_full_regression" value="browser:chrome; browser:firefox"/>-->
+
     <parameter name="provider" value="selenium"/>
 
-    <test name="chrome-test" parallel="methods" thread-count="2">
+    <test name="chrome-test">
         <parameter name="browserName" value="chrome"/>
         <classes>
             <class name="com.solvd.infopricetesting.InfopriceTest">
-                <methods>
-                    <include name="checkReturnFromBasketPageToHomePageTest"/>
-                    <include name="checkOpenFilterMenuTest"/>
-                    <include name="checkCloseFilterMenuTest"/>
-                    <include name="checkOptionAllShopsTest"/>
-                    <include name="checkCloseButtonLocationTest"/>
-                </methods>
+<!--                <methods>-->
+<!--                    <include name="checkReturnFromBasketPageToHomePageTest"/>-->
+<!--                    <include name="checkOpenFilterMenuTest"/>-->
+<!--                    <include name="checkCloseFilterMenuTest"/>-->
+<!--                    <include name="checkOptionAllShopsTest"/>-->
+<!--                    <include name="checkCloseButtonLocationTest"/>-->
+<!--                </methods>-->
             </class>
         </classes>
     </test>
 
-    <test name="firefox-test" parallel="methods" thread-count="2">
-        <parameter name="browserName" value="firefox"/>
-        <classes>
-            <class name="com.solvd.infopricetesting.InfopriceTest">
-                <methods>
-                    <include name="checkFilterMenuLocationTest"/>
-                    <include name="checkReturnFromBasketPageToHomePageTest"/>
-                </methods>
-            </class>
-        </classes>
-    </test>
+<!--    <test name="firefox-test" parallel="methods" thread-count="2">-->
+<!--        <parameter name="browserName" value="firefox"/>-->
+<!--        <classes>-->
+<!--            <class name="com.solvd.infopricetesting.InfopriceTest">-->
+<!--                <methods>-->
+<!--                    <include name="checkFilterMenuLocationTest"/>-->
+<!--                    <include name="checkReturnFromBasketPageToHomePageTest"/>-->
+<!--                </methods>-->
+<!--            </class>-->
+<!--        </classes>-->
+<!--    </test>-->
 
 </suite>
