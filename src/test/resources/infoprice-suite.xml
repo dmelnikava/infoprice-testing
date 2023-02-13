@@ -5,8 +5,7 @@
 
     <parameter name="suiteOwner" value="qpsdemo"/>
     <parameter name="jenkinsJobName" value="InfopriceTest"/>
-    <parameter name="jenkinsJobType" value="api"/>
-    <parameter name="jenkinsEmail" value="test@qaprosoft.com"/>
+    <parameter name="jenkinsJobType" value="web"/>
     <parameter name="jenkinsEnvironments" value="DEMO"/>
     <parameter name="scheduling" value="H 2 * * *" />
 
