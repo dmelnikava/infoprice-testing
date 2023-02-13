@@ -5,6 +5,7 @@
     <parameter name="jenkinsJobName" value="InfopriceTest"/>
     <parameter name="jenkinsJobType" value="web"/>
     <parameter name="jenkinsEnvironments" value="DEMO"/>
+    <parameter name="provider" value="selenium"/>
 
     <test name="chrome-test" parallel="methods" thread-count="2">
         <parameter name="browserName" value="chrome"/>
