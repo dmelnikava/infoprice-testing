@@ -9,7 +9,7 @@
 <!--    <parameter name="jenkinsRegressionPipeline" value="web_regression, full_regression"/>-->
 <!--    <parameter name="jenkinsRegressionMatrix_full_regression" value="browser:chrome; browser:firefox"/>-->
 
-    <parameter name="provider" value="selenium"/>
+<!--    <parameter name="provider" value="selenium"/>-->
 
     <test name="chrome-test">
         <parameter name="browserName" value="chrome"/>
