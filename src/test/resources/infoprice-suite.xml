@@ -6,7 +6,6 @@
     <parameter name="jenkinsJobType" value="web"/>
     <parameter name="jenkinsEnvironments" value="DEMO"/>
     <parameter name="scheduling" value="H H * * *" />
-
     <parameter name="provider" value="selenium"/>
 
     <parameter name="jenkinsRegressionPipeline" value="web_regression, full_regression"/>
@@ -29,12 +28,13 @@
         </classes>
     </test>
 
-    <test name="firefox-test">
+    <test name="firefox-test" parallel="methods" thread-count="2">
         <parameter name="browserName" value="firefox" />
         <classes>
             <class name="com.solvd.infopricetesting.InfopriceTest">
                 <methods>
                     <include name="checkFilterMenuLocationTest"/>
+                    <include name="checkReturnFromBasketPageToHomePageTest"/>
                 </methods>
             </class>
         </classes>
