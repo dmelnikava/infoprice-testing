@@ -1,6 +1,6 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
 
-<suite verbose="1" name="infoprice-suite" parallel="methods">
+<suite verbose="1" name="infoprice-suite" parallel="methods" thread-count="2">
 
     <parameter name="jenkinsJobName" value="InfopriceTest"/>
     <parameter name="jenkinsJobType" value="web"/>
@@ -34,7 +34,7 @@
         <classes>
             <class name="com.solvd.infopricetesting.InfopriceTest">
                 <methods>
-                    <include name="checkReturnFromBasketPageToHomePageTest"/>
+                    <include name="checkFilterMenuLocationTest"/>
                 </methods>
             </class>
         </classes>
