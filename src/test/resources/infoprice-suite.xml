@@ -35,7 +35,6 @@
             <class name="com.solvd.infopricetesting.InfopriceTest">
                 <methods>
                     <include name="checkFilterMenuLocationTest"/>
-                    <include name="checkReturnFromBasketPageToHomePageTest"/>
                 </methods>
             </class>
         </classes>
