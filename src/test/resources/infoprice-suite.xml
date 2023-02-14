@@ -1,6 +1,6 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
 
-<suite verbose="1" name="infoprice-suite" parallel="methods" thread-count="2">
+<suite verbose="1" name="infoprice-suite">
 
     <parameter name="jenkinsJobName" value="InfopriceTest"/>
     <parameter name="jenkinsJobType" value="web"/>
@@ -14,7 +14,7 @@
 
     <parameter name="jenkinsAutoScreenshot" value="true"/>
 
-    <test name="chrome-test">
+    <test name="chrome-test" parallel="methods" thread-count="2">
         <parameter name="browserName" value="chrome"/>
         <classes>
             <class name="com.solvd.infopricetesting.InfopriceTest">
