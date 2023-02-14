@@ -28,7 +28,7 @@
         </classes>
     </test>
 
-    <test name="firefox-test" parallel="methods" thread-count="2">
+    <test name="firefox-test">
         <parameter name="browserName" value="firefox" />
         <classes>
             <class name="com.solvd.infopricetesting.InfopriceTest">
