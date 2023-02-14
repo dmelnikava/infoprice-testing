@@ -29,12 +29,11 @@
     </test>
 
     <test name="firefox-test">
-        <parameter name="browserName" value="firefox" />
+        <parameter name="browserName" value="firefox"/>
         <classes>
             <class name="com.solvd.infopricetesting.InfopriceTest">
                 <methods>
                     <include name="checkFilterMenuLocationTest"/>
-                    <include name="checkReturnFromBasketPageToHomePageTest"/>
                 </methods>
             </class>
         </classes>
