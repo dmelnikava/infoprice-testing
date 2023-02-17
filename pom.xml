@@ -16,7 +16,7 @@
     <slf4j-version>2.0.5</slf4j-version>
     <apache-logger-version>2.19.0</apache-logger-version>
     <zebrunner-agent.version>1.9.3</zebrunner-agent.version>
-    <suite>infoprice-suite</suite>
+    <suite>suite</suite>
   </properties>
 
   <repositories>
