@@ -34,6 +34,7 @@
             <class name="com.solvd.infopricetesting.InfopriceTest">
                 <methods>
                     <include name="checkFilterMenuLocationTest"/>
+                    <include name="checkCloseButtonLocationTest"/>
                 </methods>
             </class>
         </classes>
