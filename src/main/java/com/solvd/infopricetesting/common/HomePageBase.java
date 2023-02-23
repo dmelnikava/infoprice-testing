@@ -10,7 +10,6 @@ public abstract class HomePageBase extends AbstractPage {
 
     public HomePageBase(WebDriver driver){
         super(driver);
-        setPageURL("");
     }
 
     public abstract boolean isPageOpened();
