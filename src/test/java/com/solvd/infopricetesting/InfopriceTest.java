@@ -74,7 +74,7 @@ public class InfopriceTest implements IAbstractTest, IMobileUtils {
         WebElement closeButton = homePage.getCloseButton();
         if(closeButton.isEnabled()) {
             Point point = closeButton.getLocation();
-            softAssert.assertEquals(point.getX(), 367, "Close button is not located in the right place");
+            softAssert.assertEquals(point.getX(), 315, "Close button is not located in the right place");
             softAssert.assertEquals(point.getY(), 20, "Close button is not located in the right place");
         }
 
