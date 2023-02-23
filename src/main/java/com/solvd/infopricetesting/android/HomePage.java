@@ -47,6 +47,9 @@ public class HomePage extends HomePageBase implements IMobileUtils {
     @FindBy(css = ".cart-img")
     private ExtendedWebElement basketIcon;
 
+    @FindBy(css = ".close")
+    private ExtendedWebElement closeMsgBtn;
+
     private final By closeButton = By.cssSelector(".close-button");
 
     public HomePage(WebDriver driver) {
@@ -137,6 +140,6 @@ public class HomePage extends HomePageBase implements IMobileUtils {
 
     @Override
     public void clickCloseMsgBtn() {
-        tap(1353, 2028, 10);
+        closeMsgBtn.click();
     }
 }
