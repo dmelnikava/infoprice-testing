@@ -38,4 +38,6 @@ public abstract class HomePageBase extends AbstractPage {
 
     public abstract String getTextOfTitle();
 
+    public abstract void clickCloseMsgBtn();
+
 }

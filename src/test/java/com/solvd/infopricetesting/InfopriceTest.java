@@ -36,6 +36,7 @@ public class InfopriceTest implements IAbstractTest, IMobileUtils {
     public void checkFilterMenuLocationTest() {
         HomePageBase homePage = initPage(getDriver(), HomePageBase.class);
         homePage.open();
+        homePage.clickCloseMsgBtn();
 
         Assert.assertNotNull(homePage.getFilterButtonLocation(), "Filter button is not located in the right place");
 
@@ -100,6 +101,7 @@ public class InfopriceTest implements IAbstractTest, IMobileUtils {
 
         HomePageBase homePage = initPage(getDriver(), HomePageBase.class);
         homePage.open();
+        homePage.clickCloseMsgBtn();
         homePage.openFilterMenu();
         homePage.clickAllShopsCheckBox();
 

@@ -1,6 +1,7 @@
 package com.solvd.infopricetesting.android;
 
 import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
+import com.qaprosoft.carina.core.foundation.webdriver.locator.ExtendedFindBy;
 import com.solvd.infopricetesting.common.BasketPageBase;
 import com.solvd.infopricetesting.common.HomePageBase;
 import com.zebrunner.carina.utils.factory.DeviceType;
@@ -46,6 +47,9 @@ public class HomePage extends HomePageBase implements IMobileUtils {
 
     @FindBy(css = ".cart-img")
     private ExtendedWebElement basketIcon;
+
+    @ExtendedFindBy(text = "Close")
+    private ExtendedWebElement closeMsgBtn;
 
     private final By closeButton = By.cssSelector(".close-button");
 
@@ -133,5 +137,10 @@ public class HomePage extends HomePageBase implements IMobileUtils {
     @Override
     public String getTextOfTitle() {
         return title.getText();
+    }
+
+    @Override
+    public void clickCloseMsgBtn() {
+        closeMsgBtn.click();
     }
 }
