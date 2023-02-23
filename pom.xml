@@ -6,22 +6,44 @@
 
   <groupId>com.solvd</groupId>
   <artifactId>infoprice-testing</artifactId>
+  <packaging>jar</packaging>
   <version>1.0-SNAPSHOT</version>
 
   <properties>
-    <carina-core-version>8.0.5</carina-core-version>
-    <compiler-plugin-version>3.10.1</compiler-plugin-version>
-    <maven-surefire-plugin-version>3.0.0-M7</maven-surefire-plugin-version>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <carina-core_version>8.0.7</carina-core_version>
+    <carina-aws-s3.version>1.0.1</carina-aws-s3.version>
+    <java.version>11</java.version>
+    <zebrunner-agent.version>1.9.3</zebrunner-agent.version>
     <slf4j-version>2.0.5</slf4j-version>
     <apache-logger-version>2.19.0</apache-logger-version>
     <suite>suite-name</suite>
   </properties>
 
+  <repositories>
+    <repository>
+      <id>zebrunner_snapshots</id>
+      <name>zebrunner Snapshots</name>
+      <url>https://nexus.zebrunner.dev/repository/ce-snapshots/</url>
+      <releases>
+        <enabled>false</enabled>
+      </releases>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+    </repository>
+  </repositories>
+
   <dependencies>
     <dependency>
       <groupId>com.qaprosoft</groupId>
       <artifactId>carina-core</artifactId>
-      <version>${carina-core-version}</version>
+      <version>${carina-core_version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.zebrunner</groupId>
+      <artifactId>carina-aws-s3</artifactId>
+      <version>${carina-aws-s3.version}</version>
     </dependency>
     <dependency>
       <groupId>org.slf4j</groupId>
@@ -43,33 +65,60 @@
       <artifactId>log4j-api</artifactId>
       <version>${apache-logger-version}</version>
     </dependency>
+    <dependency>
+      <groupId>net.bytebuddy</groupId>
+      <artifactId>byte-buddy</artifactId>
+      <version>1.12.10</version>
+    </dependency>
   </dependencies>
 
   <build>
-    <pluginManagement>
-      <plugins>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-compiler-plugin</artifactId>
-          <version>${compiler-plugin-version}</version>
-          <configuration>
-            <source>19</source>
-            <target>19</target>
-            <encoding>UTF-8</encoding>
-          </configuration>
-        </plugin>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-surefire-plugin</artifactId>
-          <version>${maven-surefire-plugin-version}</version>
-          <configuration>
-            <suiteXmlFiles>
-              <suiteXmlFile>${project.build.directory}/test-classes/${suite}.xml
-              </suiteXmlFile>
-            </suiteXmlFiles>
-          </configuration>
-        </plugin>
-      </plugins>
-    </pluginManagement>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.10.1</version>
+        <configuration>
+          <release>${java.version}</release>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <version>3.3.0</version>
+        <executions>
+          <execution>
+            <id>copy</id>
+            <phase>initialize</phase>
+            <goals>
+              <goal>copy</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <artifactItems>
+            <artifactItem>
+              <groupId>com.zebrunner</groupId>
+              <artifactId>agent-core</artifactId>
+              <version>${zebrunner-agent.version}</version>
+              <outputDirectory>${project.build.directory}/agent</outputDirectory>
+              <destFileName>zebrunner-agent.jar</destFileName>
+            </artifactItem>
+          </artifactItems>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>3.0.0-M6</version>
+        <configuration>
+          <argLine>-javaagent:${project.build.directory}/agent/zebrunner-agent.jar</argLine>
+          <useSystemClassLoader>false</useSystemClassLoader>
+          <suiteXmlFiles>
+            <suiteXmlFile>${project.build.directory}/test-classes/testng_suites/${suite}.xml</suiteXmlFile>
+          </suiteXmlFiles>
+        </configuration>
+      </plugin>
+    </plugins>
   </build>
 </project>

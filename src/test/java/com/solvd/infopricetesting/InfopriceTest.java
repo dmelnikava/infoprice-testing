@@ -12,7 +12,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
-public class InfopriceAndroidTest implements IAbstractTest, IMobileUtils {
+public class InfopriceTest implements IAbstractTest, IMobileUtils {
 
     @Test(testName = "Check returning from the Basket page to the Home page")
     public void checkReturnFromBasketPageToHomePageTest() {
