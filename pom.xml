@@ -8,7 +8,7 @@
   <artifactId>infoprice-testing</artifactId>
   <packaging>jar</packaging>
   <version>1.0-SNAPSHOT</version>
-  <url>https://github.com/dmelnikava/infoprice-testing</url>
+<!--  <url>https://github.com/dmelnikava/infoprice-testing</url>-->
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
