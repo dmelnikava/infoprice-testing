@@ -1,29 +1,23 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="infoprice-suite" parallel="methods" thread-count="2">
 
-<suite name="infoprice-suite" parallel="tests" thread-count="2">
-    <test name="chrome-test" parallel="methods" thread-count="2">
-        <parameter name="browserName" value="chrome"/>
+    <parameter name="suiteOwner" value="qpsdemo" />
+    <parameter name="provider" value="mcloud"/>
+    <parameter name="jenkinsJobName" value="Mobile-Android-Demo-Test" />
+    <parameter name="jenkinsJobType" value="android"/>
+    <parameter name="jenkinsEmail" value="demo@qaprosoft.com" />
+    <parameter name="jenkinsEnvironments" value="DEMO" />
+
+    <parameter name="jenkinsMobileDefaultPool" value="ANY" />
+
+    <parameter name="jenkinsRegressionPipeline" value="mobile_regression" />
+    <parameter name="jenkinsJobExecutionOrder" value="3" />
+    <parameter name="jenkinsJobExecutionMode" value="continue" />
+    <parameter name="jenkinsAutoScreenshot" value="true" />
+
+    <test name="chrome-test">
         <classes>
-            <class name="com.solvd.infopricetesting.InfopriceTest">
-                <methods>
-                    <include name="checkReturnFromBasketPageToHomePageTest"/>
-                    <include name="checkOpenFilterMenuTest"/>
-                    <include name="checkCloseFilterMenuTest"/>
-                    <include name="checkOptionAllShopsTest"/>
-                    <include name="checkCloseButtonLocationTest"/>
-                </methods>
-            </class>
-        </classes>
-    </test>
-    <test name="firefox-test" parallel="methods" thread-count="2">
-        <parameter name="browserName" value="firefox" />
-        <classes>
-            <class name="com.solvd.infopricetesting.InfopriceTest">
-                <methods>
-                    <include name="checkFilterMenuLocationTest"/>
-                </methods>
-            </class>
+            <class name="com.solvd.infopricetesting.InfopriceTest"/>
         </classes>
     </test>
 </suite>
